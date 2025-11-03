@@ -59,11 +59,16 @@ public class Operador implements Runnable {
             default:
 
         }
-        String parteMensaje;
+        String mensajeInicial;
+        String mensajeCompleto;
         int longitudCadena;
-        longitudCadena = 15;
-        parteMensaje = String.format("%" + longitudCadena + "d", resultado);
-        System.out.printf("El %s ha realizado la operación %s y obtiene como resultado %s %n", Thread.currentThread().getName(), nombreOperacion, parteMensaje);
+        int longitudCadena2;
+        longitudCadena = 77;
+        longitudCadena2 = 12;
+        mensajeInicial = String.format("El %s ha realizado la operación %s y obtiene como resultado:", Thread.currentThread().getName(), nombreOperacion);
+        mensajeCompleto = String.format("%-" + longitudCadena + "s", mensajeInicial);
+        System.out.println(mensajeCompleto+String.format("%" + longitudCadena2 + "d", resultado));
+
     }
 
 }
