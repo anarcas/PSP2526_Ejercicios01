@@ -2,22 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package VC03;
+package VC03_EJ01;
 
 /**
  *
  * @author anaranjo
  */
-public class Visitante implements Runnable {
-    Museo museo = new Museo("El Padro",4);
-    private int torno;
+public class HilosEntrada implements Runnable {
     
-    public Visitante(int torno){
-        this.torno=torno;
+    Museo museo = new Museo();
+    
+    public HilosEntrada(Museo gernika){
+        
+        this.museo=gernika;
     }
     
     @Override
     public void run() {
-        museo.entrar();
+
+        for (int i = 0; i < 20; i++) {
+            museo.incrementar();
+        }
     }
+    
 }
