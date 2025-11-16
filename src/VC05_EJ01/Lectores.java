@@ -5,6 +5,7 @@
 package VC05_EJ01;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 public class Lectores implements Runnable {
 
     Documento doc;
+    Random numAleatorio = new Random();
+    long tiempoLectura;
     
     public Lectores (Documento doc){
         this.doc=doc;
@@ -24,8 +27,12 @@ public class Lectores implements Runnable {
     public void run() {
 
         try {
+            tiempoLectura = (numAleatorio.nextLong(1, 10) + 1) * 1000;
+            Thread.sleep(tiempoLectura);
             doc.leer();
         } catch (IOException ex) {
+            Logger.getLogger(Lectores.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(Lectores.class.getName()).log(Level.SEVERE, null, ex);
         }
 

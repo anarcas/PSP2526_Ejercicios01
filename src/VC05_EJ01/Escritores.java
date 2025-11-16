@@ -5,6 +5,7 @@
 package VC05_EJ01;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 public class Escritores implements Runnable {
 
     Documento doc;
+    Random numAleatorio = new Random();
+    long tiempoEscritura;
     
     public Escritores(Documento doc){
         this.doc=doc;
@@ -24,7 +27,9 @@ public class Escritores implements Runnable {
     public void run() {
 
         try {
-            doc.escribir(String.format("Hilo %s escribiendo...",Thread.currentThread().getName()));
+            doc.escribir(String.format("Hilo %s ha escrito.",Thread.currentThread().getName()));
+            tiempoEscritura = (numAleatorio.nextLong(1, 10) + 1) * 1000;
+            Thread.sleep(tiempoEscritura);
         } catch (IOException ex) {
             Logger.getLogger(Escritores.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {

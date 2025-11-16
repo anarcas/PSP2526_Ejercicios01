@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
 
 /**
  *
@@ -20,17 +19,13 @@ public class Documento {
 
     private final String ARCHIVO_TXT = "archivo.txt";
     File archivo = new File(ARCHIVO_TXT);
-    Random numAleatorio = new Random();
-    long tiempoEscritura;
-    long tiempoLectura;
 
     public synchronized void escribir(String texto) throws IOException, InterruptedException {
-        tiempoEscritura = (numAleatorio.nextLong(1, 10) + 1) * 1000;
-        wait(tiempoEscritura);
+        
         //FileWriter escribe caracteres y BufferedWriter crea el flujo de escritura
         try (FileWriter fw = new FileWriter(archivo, true); BufferedWriter bw = new BufferedWriter(fw);) {
-            bw.write("\n");
-            bw.write(texto);
+            // Importante el salto de línea al final del texto
+            bw.write(String.format("%s \n",texto));
         } catch (IOException e) {
             System.err.println("Error al escribir en el archivo de texto.");
         }
@@ -42,7 +37,7 @@ public class Documento {
             System.out.println(String.format("\n Advertencia: El archivo %s no existe para la lectura.", ARCHIVO_TXT));
             return;
         }
-        tiempoLectura = (numAleatorio.nextLong(1, 10) + 1) * 1000;
+        
         //FileWriter escribe caracteres y BufferedReader capta el flujo de lectura
         try (FileReader fr = new FileReader(archivo); BufferedReader br = new BufferedReader(fr);) {
 
